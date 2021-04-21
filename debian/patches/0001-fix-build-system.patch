@@ -1,0 +1,64 @@
+From: mhagdorn <magnus.hagdorn@marsupium.org>
+Date: Wed, 21 Apr 2021 15:12:26 +0100
+Subject: fix build system
+
+---
+ Makefile            | 11 +++++++++++
+ SeaBreeze/Makefile  |  9 ++++++++-
+ SeaBreeze/common.mk |  1 -
+ 3 files changed, 19 insertions(+), 2 deletions(-)
+ create mode 100644 Makefile
+
+diff --git a/Makefile b/Makefile
+new file mode 100644
+index 0000000..377f8d8
+--- /dev/null
++++ b/Makefile
+@@ -0,0 +1,11 @@
++all:
++	make -C SeaBreeze
++
++install:
++	make -C SeaBreeze install
++
++clean:
++	make -C SeaBreeze clean
++
++distclean:
++	make -C SeaBreeze distclean
+diff --git a/SeaBreeze/Makefile b/SeaBreeze/Makefile
+index 9932685..9432065 100644
+--- a/SeaBreeze/Makefile
++++ b/SeaBreeze/Makefile
+@@ -20,11 +20,18 @@ help:
+ 	@echo "  make winclean          Invoke Visual Studio's 'clean' target"
+ 	@echo "  make doc               Generate rendered documentation"
+ 	@echo "  make help              This screen"
+-	
++
+ seabreeze: lib/$(LIBNAME)
+ 	make -C test
+ 	make -C sample-code
+ 
++install:	seabreeze
++	install -D lib/libseabreeze.so $(DESTDIR)/usr/lib/$(DEB_HOST_MULTIARCH)/libseabreeze.so
++	install -d $(DESTDIR)/usr/include && cp -r include $(DESTDIR)/usr/include/seabreeze
++	install -D sample-code/c/seabreeze-util $(DESTDIR)/usr/bin/seabreeze-util
++	install -D os-support/linux/10-oceanoptics.rules $(DESTDIR)/etc/udev/rules.d/10-oceanoptics.rules
++
++
+ lib/libseabreeze.$(SUFFIX): initialize
+ 	$(info lflags = $(LFLAGS_LIB))
+ 	$(info cflags = $(CFLAGS))
+diff --git a/SeaBreeze/common.mk b/SeaBreeze/common.mk
+index dc7602e..f3ff6d1 100644
+--- a/SeaBreeze/common.mk
++++ b/SeaBreeze/common.mk
+@@ -8,7 +8,6 @@ CFLAGS_BASE = -I${SEABREEZE}/include \
+               -Wall \
+               -Wunused \
+               -Wmissing-include-dirs \
+-              -Werror \
+               -O0 \
+               -fpic \
+               -fno-stack-protector \
