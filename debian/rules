@@ -3,6 +3,10 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
+### Define DEB_HOST_* and  DEB_BUILD_* variables using
+### dpkg-architecture(1) if they are used in this file. E.g.:
+DEB_HOST_MULTIARCH = $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+DEB_HOST_ARCH_OS = $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
 
 # see FEATURE AREAS in dpkg-buildflags(1)
 #export DEB_BUILD_MAINT_OPTIONS = hardening=+all
@@ -15,7 +19,7 @@
 
 
 %:
-	dh $@
+	dh $@  --parallel
 
 
 # dh_make generated override targets
