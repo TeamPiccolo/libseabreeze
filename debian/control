@@ -1,7 +1,7 @@
 Source: seabreeze
 Priority: optional
 Maintainer: Magnus Hagdorn <magnus.hagdorn@ed.ac.uk>
-Build-Depends: debhelper-compat (= 12) libusb-dev
+Build-Depends: debhelper-compat (= 12),  libusb-dev
 Standards-Version: 4.4.1
 Section: libs
 Homepage: https://oceanoptics.com/product/seabreeze/
