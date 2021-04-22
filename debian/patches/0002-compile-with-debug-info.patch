@@ -1,0 +1,25 @@
+From: mhagdorn <magnus.hagdorn@marsupium.org>
+Date: Thu, 22 Apr 2021 10:09:46 +0100
+Subject: compile with debug info
+
+---
+ SeaBreeze/common.mk | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/SeaBreeze/common.mk b/SeaBreeze/common.mk
+index f3ff6d1..35e22f5 100644
+--- a/SeaBreeze/common.mk
++++ b/SeaBreeze/common.mk
+@@ -1,9 +1,10 @@
+ CC  = gcc
+ CPP = g++
+ 
+-LFLAGS_LIB  =
+-LFLAGS_APP  = -L${SEABREEZE}/lib
++LFLAGS_LIB  = -g
++LFLAGS_APP  = -g -L${SEABREEZE}/lib
+ CFLAGS_BASE = -I${SEABREEZE}/include \
++	      -g \
+               -c \
+               -Wall \
+               -Wunused \
