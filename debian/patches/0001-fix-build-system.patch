@@ -44,7 +44,7 @@ index 9932685..9432065 100644
 +	install -D lib/libseabreeze.so $(DESTDIR)/usr/lib/$(DEB_HOST_MULTIARCH)/libseabreeze.so
 +	install -d $(DESTDIR)/usr/include && cp -r include $(DESTDIR)/usr/include/seabreeze
 +	install -D sample-code/c/seabreeze-util $(DESTDIR)/usr/bin/seabreeze-util
-+	install -D os-support/linux/FilesToInstall/10-oceanoptics.rules $(DESTDIR)/etc/udev/rules.d/10-oceanoptics.rules
++	install -D os-support/linux/10-oceanoptics.rules $(DESTDIR)/etc/udev/rules.d/10-oceanoptics.rules
 +
 +
  lib/libseabreeze.$(SUFFIX): initialize

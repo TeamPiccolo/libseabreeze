@@ -1,0 +1,21 @@
+From: mhagdorn <magnus.hagdorn@marsupium.org>
+Date: Thu, 22 Apr 2021 10:57:36 +0100
+Subject: fix location rules file
+
+---
+ SeaBreeze/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/SeaBreeze/Makefile b/SeaBreeze/Makefile
+index 9432065..8744bd4 100644
+--- a/SeaBreeze/Makefile
++++ b/SeaBreeze/Makefile
+@@ -29,7 +29,7 @@ install:	seabreeze
+ 	install -D lib/libseabreeze.so $(DESTDIR)/usr/lib/$(DEB_HOST_MULTIARCH)/libseabreeze.so
+ 	install -d $(DESTDIR)/usr/include && cp -r include $(DESTDIR)/usr/include/seabreeze
+ 	install -D sample-code/c/seabreeze-util $(DESTDIR)/usr/bin/seabreeze-util
+-	install -D os-support/linux/10-oceanoptics.rules $(DESTDIR)/etc/udev/rules.d/10-oceanoptics.rules
++	install -D os-support/linux/FilesToInstall/10-oceanoptics.rules $(DESTDIR)/etc/udev/rules.d/10-oceanoptics.rules
+ 
+ 
+ lib/libseabreeze.$(SUFFIX): initialize
